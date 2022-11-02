@@ -33,16 +33,25 @@ object StyleGuideComparator {
     fun compareCategoryName(
         oldSG: Map<String, ArrayList<String>>,
         newSG: Map<String, ArrayList<String>>
-    ): String {
+    ): List<List<String>> {
+        val result = mutableListOf<List<String>>()
         newSG.keys.forEach {
             if (!oldSG.containsKey(it)) {
                 return@forEach
             }
-            if (newSG[it]?.get(0).toString() != oldSG[it]?.get(0).toString()) {
-                println("Category name changed from \"${oldSG[it]?.get(0)}\" to \"${newSG[it]?.get(0)}\"")
+            val oldSgCategoryName = oldSG[it]?.get(0).toString()
+            val newSgCategoryName = newSG[it]?.get(0).toString()
+            if (oldSgCategoryName != newSgCategoryName) {
+                result.add(listOf(
+                    it,
+                    oldSgCategoryName,
+                    newSgCategoryName
+
+                ))
+                println("Category name changed from \"$oldSgCategoryName\" to \"$newSgCategoryName\"")
             }
         }
-        return ""
+        return result
     }
 
     fun compareShortName(
@@ -68,7 +77,7 @@ object StyleGuideComparator {
     ): MutableList<List<String>> {
         val result = mutableListOf<List<String>>()
         var changed = 0
-        newSG.keys.forEach { it ->
+        newSG.keys.forEach {
             if (!oldSG.containsKey(it)) {
                 return@forEach
             }

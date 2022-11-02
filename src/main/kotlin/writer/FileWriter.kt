@@ -10,7 +10,6 @@ object FileWriter {
         val myWorkBook = XSSFWorkbook()
         val myWorkList = myWorkBook.createSheet(filename)
 
-
         myWorkList.createRow(0)
         headers.forEachIndexed { i, str ->
             myWorkList.getRow(0).createCell(i).setCellValue(str)

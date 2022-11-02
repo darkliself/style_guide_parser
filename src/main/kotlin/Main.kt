@@ -56,6 +56,12 @@ fun App() {
                         ),
                         "SG update"
                     )
+                    FileWriter.writeToFile(StyleGuideComparator.compareCategoryName(olgSG!!, newSG!!), listOf(
+                        Constants.CATEGORY_ID,
+                        Constants.OLD_CATEGORY_NAME,
+                        Constants.NEW_CATEGORY_NAME
+                    ),
+                    "New Category Names")
                 } else {
                     println("some error")
                 }
